@@ -1,5 +1,3 @@
-# catch text disable bool and disable text
-
 blueprint:
   name: "HASP p[x].b[y] displays color swatches"
   description: |
@@ -14,7 +12,7 @@ blueprint:
 
     ---
 
-    # !!! WARNING !!!
+    # ⚠️ WARNING ⚠️
     
     ## All HASPone blueprints must be updated to version 1.05 or later before deploying this blueprint!
     
@@ -270,7 +268,7 @@ blueprint:
         boolean:
     text_enable:
       name: "Text enabled"
-      description: "Enable text output on selected button.  Disable this if using some other blueprint to label this button."
+      description: "Enable text and styling on selected button.  Disable this if using some other blueprint to label this button."
       default: true
       selector:
         boolean:
@@ -522,24 +520,6 @@ action:
                 ((trigger.platform == 'template') and (trigger.entity_id == haspsensor) and (trigger.to_state.state == 'ON'))
               }}
         sequence:
-          # Display text and apply text style on source button
-          - service: mqtt.publish
-            data:
-              topic: "{{jsoncommandtopic}}"
-              payload: >-
-                [
-                "{{haspobject}}.font={{font}}",
-                "{{haspobject}}.xcen={{xcen}}",
-                "{{haspobject}}.ycen={{ycen}}",
-                "{{haspobject}}.isbr={{isbr}}",
-                "{{haspobject}}.pco={{selectedfg}}",
-                "{{haspobject}}.bco={{selectedbg}}",
-                "{{haspobject}}.pco2={{unselectedfg}}",
-                "{{haspobject}}.bco2={{unselectedbg}}"
-                {% if text_enable %}
-                  ,"{{haspobject}}.txt=\"{{text}}\""
-                {% endif %}
-                ]
           # Create returnpage helper
           - service: mqtt.publish
             data:
@@ -569,6 +549,28 @@ action:
               topic: "hasp/{{haspname}}/alwayson"
               payload: "ON"
               retain: true
+          - choose:
+              #########################################################################
+              # Display text and apply text style on source button
+              - conditions:
+                  - condition: template
+                    value_template: "{{ text_enable }}"
+                sequence:
+                  - service: mqtt.publish
+                    data:
+                      topic: "{{jsoncommandtopic}}"
+                      payload: >-
+                        [
+                        "{{haspobject}}.font={{font}}",
+                        "{{haspobject}}.xcen={{xcen}}",
+                        "{{haspobject}}.ycen={{ycen}}",
+                        "{{haspobject}}.isbr={{isbr}}",
+                        "{{haspobject}}.pco={{selectedfg}}",
+                        "{{haspobject}}.bco={{selectedbg}}",
+                        "{{haspobject}}.pco2={{unselectedfg}}",
+                        "{{haspobject}}.bco2={{unselectedbg}}",
+                        "{{haspobject}}.txt=\"{{text}}\""
+                        ]
       #########################################################################
       # Colorlight brightness has changed
       - conditions:
