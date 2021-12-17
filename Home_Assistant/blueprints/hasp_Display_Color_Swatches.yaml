@@ -10,6 +10,14 @@ blueprint:
 
     ![Preview](https://github.com/aderusha/HASwitchPlate/raw/master/Documentation/Images/hasp_Display_Color_Swatches.png?raw=true)
 
+    ---
+
+    # WARNING
+    
+    ## All HASPone-related blueprints must be updated to version 1.05 or later before deploying this blueprint!
+    
+    ---
+
     ## HASP Page and Button Reference
 
     The images below show each available HASP page along with the layout of available button objects.
@@ -496,10 +504,6 @@ condition:
     value_template: "{{ is_state(haspsensor, 'ON') }}"
 
 action:
-  - service: mqtt.publish
-    data:
-      topic: "DEBUG"
-      payload: "\n============================\njsoncommandtopic: {{jsoncommandtopic}}\ntrigger: {{trigger}}\njsontopic: {{jsontopic}}\nhaspname: {{haspname}}\n============================"
   - choose:
       #########################################################################
       # RUN ACTIONS or Home Assistant Startup or HASP Connect
@@ -529,8 +533,10 @@ action:
                 "{{haspobject}}.pco={{selectedfg}}",
                 "{{haspobject}}.bco={{selectedbg}}",
                 "{{haspobject}}.pco2={{unselectedfg}}",
-                "{{haspobject}}.bco2={{unselectedbg}}",
-                "{{haspobject}}.txt=\"{{text}}\""
+                "{{haspobject}}.bco2={{unselectedbg}}"
+                {% if text_enable %}
+                  ,"{{haspobject}}.txt=\"{{text}}\""
+                {% endif %}
                 ]
           # Create returnpage helper
           - service: mqtt.publish
