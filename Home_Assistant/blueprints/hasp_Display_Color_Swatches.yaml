@@ -6,15 +6,17 @@ blueprint:
 
     ## Description
 
-    Display color select buttons on page 11
+    Display color select swatches and dimmer for RGB light control
 
-    ![Preview](https://github.com/aderusha/HASwitchPlate/raw/master/Documentation/Images/hasp_Display_Color_Swatches.png?raw=true)
+    ![Preview](https://raw.githubusercontent.com/HASwitchPlate/HASPone/blueprint-dev/images/hasp_Display_Calendar_with_Icon.png)
+
+    Creates a labeled button somewhere on pages 1 through 10.  When pressed, user is shown a set of 12 color swatches along with dimmer controls.  When complete, user selects "return" to navigate back to the previous page.
 
     ---
 
-    # WARNING
+    # !!! WARNING !!!
     
-    ## All HASPone-related blueprints must be updated to version 1.05 or later before deploying this blueprint!
+    ## All HASPone blueprints must be updated to version 1.05 or later before deploying this blueprint!
     
     ---
 
