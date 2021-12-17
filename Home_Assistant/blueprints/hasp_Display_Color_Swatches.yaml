@@ -1,6 +1,4 @@
-# disable sendxy on exit page
 # catch text disable bool and disable text
-# icon not showing on toggle
 
 blueprint:
   name: "HASP p[x].b[y] displays color swatches"
@@ -701,6 +699,23 @@ action:
                                 "xstr 10,215,90,60,8,{{selectedfg}},{{selectedbg}},0,0,3,\"\"",
                                 "xstr 75,210,230,60,8,{{selectedfg}},{{selectedbg}},0,0,3,\"Return\""
                                 ]
+                      #########################################################################
+                      # Page changed to some other page, clean up after ourselves
+                      - conditions:
+                          - condition: template
+                            value_template: >-
+                              {{
+                                (trigger.payload_json.event == "page")
+                              and
+                                (trigger.payload_json.value != 11)
+                              and
+                                (helperSourceAutomation == this.entity_id)
+                              }}
+                        sequence:
+                          - service: mqtt.publish
+                            data:
+                              topic: "hasp/{{haspname}}/returnpage/command"
+                              payload: "{}"
                       #########################################################################
                       # Power button button was pressed, toggle power on colorlight
                       - conditions:
