@@ -2,6 +2,8 @@ blueprint:
   name: "HASP p[x].b[y] displays color swatches"
   description: |
 
+    ## Blueprint Version: `1.05.00`
+
     ## Description
 
     Display color select swatches and dimmer for RGB light control
