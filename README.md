@@ -1,5 +1,8 @@
 # HA SwitchPlate HASPone
+![ESP Firmware Version][esp-firmware-shield]
+![SCREEN Firmware Version][screen-firmware-shield]
 
+## About
 The HASPone is a DIY touchscreen controller you can mount into a [standard North American work box](https://www.nema.org/Standards/ComplimentaryDocuments/NEMA%20WD%206%20-%20Dimensions%20for%20Wiring%20Devices%20-%20Excerpt.pdf).  It connects to your home automation system over Wifi+MQTT to display useful information and to control your smart devices.  The result is an attractive and highly-customizable home controller you can build yourself!
 
 ![HA SwitchPlate Models](https://github.com/HASwitchPlate/HASPone/blob/main/images/HASwitchPlate_Three_Model_Variations.png?raw=true)
@@ -33,3 +36,8 @@ Come talk to us in [the HASPone discussion forum](https://github.com/HASwitchPla
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/black_img.png)](https://www.buymeacoffee.com/gW5rPpsKR)
 
 This project is powered by coffee.  [I might get a little weird about it at times](https://github.com/aderusha/RoastLearner), but it's not much of a stretch to suggest that coffee both powers and consumes a fair portion of my mental energy.  [Hook me up if you think HASP is cool](https://www.buymeacoffee.com/gW5rPpsKR).  Thanks!
+
+
+
+[esp-firmware-shield]: https://img.shields.io/badge/ESP_Firmware-v1.05-blue.svg
+[screen-firmware-shield]: https://img.shields.io/badge/SCREEN_Firmware-v3-blue.svg
